@@ -1,4 +1,4 @@
-
+"""
 import RPi.GPIO as GPIO
 import time
 
@@ -96,4 +96,4 @@ def run_dht_loop(dht, delay, callback, stop_event):
 			if stop_event.is_set():
 					break
 			time.sleep(delay)  # Delay between readings
-			
+"""			
