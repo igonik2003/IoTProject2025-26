@@ -1,6 +1,8 @@
 import threading
 from settings import load_settings
 from components.dht import run_dus1
+from components.dht import run_dpir1
+
 import time
 
 if __name__ == "__main__":
@@ -11,8 +13,10 @@ if __name__ == "__main__":
     try:
         dus1_settings = settings['DUS1']
         run_dus1(dus1_settings, threads, stop_event)
+        dpir1_settings = settings['DPIR1']
+        run_dpir1(dpir1_settings, threads, stop_event)
         while True:
-            time.sleep(1)
+            time.sleep(5)
 
     except KeyboardInterrupt:
         for t in threads:
