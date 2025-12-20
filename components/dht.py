@@ -1,30 +1,22 @@
-
-
-from simulators.dht import run_dht_simulator
+#from sensors.DUS1 import run_dus1_loop
+from simulators.DUS1 import run_dus1_simulator
 import threading
 import time
 
-def dht_callback(humidity, temperature, code):
-    t = time.localtime()
-    print("="*20)
-    print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
-    print(f"Code: {code}")
-    print(f"Humidity: {humidity}%")
-    print(f"Temperature: {temperature}°C")
+def dus1_callback(distance):
+    print(f"Distance: {distance}")
 
-
-def run_dht(settings, threads, stop_event):
-        if settings['simulated']:
-            print("Starting dht1 sumilator")
-            dht1_thread = threading.Thread(target = run_dht_simulator, args=(2, dht_callback, stop_event))
-            dht1_thread.start()
-            threads.append(dht1_thread)
-            print("Dht1 sumilator started")
+def run_dus1(settings, threads, stop_event):
+        if settings['simulated']==True:
+            dus1_thread = threading.Thread(target = run_dus1_simulator, args=(2, dus1_callback, stop_event))
+            dus1_thread.start()
+            threads.append(dus1_thread)
+            print("Dus1 sumilator started")
         else:
-            from sensors.dht import run_dht_loop, DHT
-            print("Starting dht1 loop")
-            dht = DHT(settings['pin'])
-            dht1_thread = threading.Thread(target=run_dht_loop, args=(dht, 2, dht_callback, stop_event))
-            dht1_thread.start()
-            threads.append(dht1_thread)
-            print("Dht1 loop started")
+            """
+            dus1_thread = threading.Thread(target=run_dus1_loop, args=(2, dus1_callback, stop_event))
+            dus1_thread.start()
+            threads.append(dus1_thread)
+            print("Dus1 loop started")    
+            """
+            print("Real sensor implementation.")        
