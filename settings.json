@@ -1,0 +1,26 @@
+{
+    "DS1": {
+        "simulated": true,
+        "pin": 17 //random pins, because we don't use real sensors at the moment  
+    },
+    "DL": {
+        "simulated": true,
+        "pin": 18
+    },
+    "DUS1": {
+        "simulated": true,
+        "pin": 19
+    },
+    "DB": {
+        "simulated": true,
+        "pin": 20
+    },
+    "DPIR1": {
+        "simulated": true,
+        "pin": 21
+    },
+    "DMS": {
+        "simulated": true,
+        "pin": 22
+    }          
+}
