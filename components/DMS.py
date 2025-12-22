@@ -12,7 +12,11 @@ def run_dms(settings, threads, stop_event):
 
     def loop():
         while not stop_event.is_set():
-            cmd = input("DMS (on/off): ").strip().lower()
+            try:
+                cmd = input("DMS (on/off): ").strip().lower()
+            except (KeyboardInterrupt, EOFError):
+                break
+
             if cmd == "on":
                 activate(pin)
             elif cmd == "off":
