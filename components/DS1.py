@@ -1,4 +1,4 @@
-#from sensors.DS1 import run_ds1_loop
+#from actuators.DS1 import run_ds1_loop
 from simulators.DS1 import run_ds1_simulator
 import threading
 import time     
