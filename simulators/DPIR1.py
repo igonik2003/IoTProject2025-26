@@ -2,16 +2,10 @@ import time
 import random
     
 
-def run_dpir1_simulator(delay,stop_event):
-    while True:
+def run_dpir1_simulator(delay,callback,stop_event):
+    while not stop_event.is_set():
         motion_detected = random.randint(0, 5) == 1
-        
-        if motion_detected:
-            print(f"[{time.strftime('%H:%M:%S')}] You moved")
-        else:
-            print(f"[{time.strftime('%H:%M:%S')}] You stopped moving.")
-            
-        if stop_event.is_set():
-            break
+
+        callback(motion_detected)
 
         time.sleep(delay)

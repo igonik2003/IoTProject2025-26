@@ -3,10 +3,17 @@ from simulators.DUS1 import run_dus1_simulator
 import threading
 import time
 
-def dus1_callback(distance):
-    print(f"[{time.strftime('%H:%M:%S')}] Distance: {distance}")
-
-def run_dus1(settings, threads, stop_event):
+def run_dus1(settings,data_queue, threads, stop_event):
+        def dus1_callback(distance):
+            data_queue.put((
+                "iot/pi1/dus1",
+                {
+                    "value": distance,
+                    "unit": "cm",
+                    "simulated": settings["simulated"],
+                    "timestamp": time.time()
+                }
+            ))
         if settings['simulated']==True:
             dus1_thread = threading.Thread(target = run_dus1_simulator, args=(2, dus1_callback, stop_event))
             print("Dus1 sumilator started")

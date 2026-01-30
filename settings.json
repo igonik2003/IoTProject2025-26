@@ -1,26 +1,45 @@
 {
-    "DS1": {
-        "simulated": true,
-        "pin": 17 
+    "device": {
+        "pi_id": "PI1",
+        "device_name": "iot_station_01"
     },
-    "DL": {
-        "simulated": true,
-        "pin": 18
+
+    "mqtt": {
+        "host": "127.0.0.1",
+        "port": 1883,
+        "base_topic": "iot/pi1",
+        "qos": 1
     },
-    "DUS1": {
-        "simulated": true,
-        "pin": 19
+
+    "batch": {
+        "size": 10,
+        "interval_sec": 5
     },
-    "DB": {
-        "simulated": true,
-        "pin": 20
-    },
-    "DPIR1": {
-        "simulated": true,
-        "pin": 21
-    },
-    "DMS": {
-        "simulated": true,
-        "pin": 22
-    }          
+
+    "sensors": {
+        "DS1": {
+            "simulated": true,
+            "pin": 17
+        },
+        "DL": {
+            "simulated": true,
+            "pin": 18
+        },
+        "DUS1": {
+            "simulated": true,
+            "pin": 19
+        },
+        "DB": {
+            "simulated": true,
+            "pin": 20
+        },
+        "DPIR1": {
+            "simulated": true,
+            "pin": 21
+        },
+        "DMS": {
+            "simulated": true,
+            "pin": 22
+        }
+    }   
 }
