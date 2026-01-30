@@ -6,3 +6,19 @@ services:
       - "1883:1883"
     volumes:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  influxdb:
+    image: influxdb
+    container_name: influxdb
+    ports:
+      - "8086:8086"  
+    environment:
+      - INFLUXDB_ADMIN_USER=igo03
+      - INFLUXDB_ADMIN_PASSWORD=igonik2003
+      - INFLUXDB_BUCKET=iot_data
+      - INFLUXDB_ORG=iot-org
+    volumes:
+      - influxdb_data:/var/lib/influxdb2  
+
+volumes:
+  influxdb_data:

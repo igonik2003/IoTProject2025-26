@@ -16,6 +16,13 @@
         "interval_sec": 5
     },
 
+    "influxdb": {
+        "url": "http://localhost:8086",
+        "org": "iot-org",
+        "bucket": "iot_data",
+        "token": "Dmp9-9FDYZ65LRNdzuzNhQHAcMaEAisIdDEcMyqG6tuTdyXx_n6hZUlHULYMIhGCU8WXM3jp9oFAfEtoicCwaA=="
+    },
+
     "sensors": {
         "DS1": {
             "simulated": true,
