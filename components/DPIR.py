@@ -9,9 +9,8 @@ def run_dpir1(settings,data_queue, threads, stop_event):
             data_queue.put((
                 "iot/pi1/dpir1",
                 {
-                    "motion": motion_detected,
+                    "value": motion_detected,
                     "simulated": settings["simulated"],
-                    "timestamp": time.time()
                 }
             ))
         if settings['simulated']==True:

@@ -43,7 +43,8 @@ def on_message(client, userdata, msg):
         point = (
             Point("iot_measurement")        
             .tag("topic", msg.topic)       
-            .field("data", json.dumps(payload))  
+            .field("data", str(payload["value"]))  
+            .field("simulated",payload["simulated"])
         )
 
         influx_write_api.write(bucket=bucket, record=point)

@@ -8,9 +8,8 @@ def run_ds1(settings,data_queue, threads, stop_event):
         data_queue.put((
             "iot/pi1/ds1",
             {
-                "pressed": button_pressed,
+                "value": button_pressed,
                 "simulated": settings["simulated"],
-                "timestamp": time.time()
             }
         ))
     if settings['simulated']==True:

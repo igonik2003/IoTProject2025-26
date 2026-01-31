@@ -19,6 +19,20 @@ services:
       - INFLUXDB_ORG=iot-org
     volumes:
       - influxdb_data:/var/lib/influxdb2  
+  
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"   # port za Grafana web UI
+    environment:
+      - GF_SECURITY_ADMIN_USER=igo03
+      - GF_SECURITY_ADMIN_PASSWORD=igonik2003
+    depends_on:
+      - influxdb
+    volumes:
+      - grafana_data:/var/lib/grafana
 
 volumes:
   influxdb_data:
+  grafana_data:

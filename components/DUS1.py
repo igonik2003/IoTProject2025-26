@@ -9,9 +9,7 @@ def run_dus1(settings,data_queue, threads, stop_event):
                 "iot/pi1/dus1",
                 {
                     "value": distance,
-                    "unit": "cm",
                     "simulated": settings["simulated"],
-                    "timestamp": time.time()
                 }
             ))
         if settings['simulated']==True:
