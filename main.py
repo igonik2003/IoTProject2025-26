@@ -22,7 +22,7 @@ if __name__ == "__main__":
     mqtt_client = create_mqtt_client(settings)
     mqtt_thread = threading.Thread(
         target=mqtt_publisher_loop,
-        args=(mqtt_client, data_queue, stop_event),
+        args=(mqtt_client, data_queue, stop_event, settings),
         daemon=True
     )
     mqtt_thread.start()
@@ -33,12 +33,12 @@ if __name__ == "__main__":
         run_dpir1(dpir1_settings,data_queue, threads, stop_event)
         ds1_settings = settings['sensors']['DS1']
         run_ds1(ds1_settings,data_queue, threads, stop_event)
-        #dl_settings = settings['sensors']["DL"]
-        #run_dl(dl_settings, threads, stop_event)
-        #db_settings = settings['sensors']["DB"]
-        #run_db(db_settings, threads, stop_event)
-        #dms_settings = settings['sensors']["DMS"]
-        #run_dms(dms_settings, threads, stop_event)
+        dl_settings = settings['sensors']["DL"]
+        run_dl(dl_settings, data_queue, threads, stop_event)
+        db_settings = settings['sensors']["DB"]
+        run_db(db_settings, data_queue, threads, stop_event)
+        dms_settings = settings['sensors']["DMS"]
+        run_dms(dms_settings, data_queue, threads, stop_event)
         while True:
             time.sleep(5)
 

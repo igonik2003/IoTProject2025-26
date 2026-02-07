@@ -1,27 +1,21 @@
 import threading
+from simulators.DMS import run_dms_simulator
 
-def run_dms(settings, threads, stop_event):
-    simulated = settings["simulated"]
-    pin = settings["pin"]
+def run_dms(settings, data_queue, threads, stop_event):
 
-    if simulated:
-        from simulators.DMS import activate, deactivate
-    else:
-        from actuators.DMS import setup, activate, deactivate
-        setup(pin)
+    def dms_callback(pressed: bool):
+        data_queue.put((
+            "iot/pi1/dms",
+            {
+                "value": int(pressed),
+                "simulated": settings["simulated"]
+            }
+        ))
 
-    def loop():
-        while not stop_event.is_set():
-            try:
-                cmd = input("DMS (on/off): ").strip().lower()
-            except (KeyboardInterrupt, EOFError):
-                break
-
-            if cmd == "on":
-                activate(pin)
-            elif cmd == "off":
-                deactivate(pin)
-
-    t = threading.Thread(target=loop)
+    t = threading.Thread(
+        target=run_dms_simulator,
+        args=(4, dms_callback, stop_event),
+        daemon=True
+    )
     t.start()
     threads.append(t)
