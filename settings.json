@@ -5,7 +5,7 @@
     },
 
     "mqtt": {
-        "host": "localhost",
+        "host": "127.0.0.1",
         "port": 1883,
         "base_topic": "iot/pi1",
         "qos": 1
@@ -17,7 +17,7 @@
     },
 
     "influxdb": {
-        "url": "http://influxdb:8086",
+        "url": "http://localhost:8086",
         "org": "iot-org",
         "bucket": "iot_data",
         "token": "bAZXKDrYmXfQdaoprL4UlgiUEEcOdlv92QhBRyQ2prfDHfP6bHTU-4DOwZRqAbIx6iawPB_sPPbwjEyrldc54g=="

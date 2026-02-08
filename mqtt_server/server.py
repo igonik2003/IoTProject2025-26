@@ -43,7 +43,7 @@ def on_message(client, userdata, msg):
         point = (
             Point("iot_measurement")        
             .tag("topic", msg.topic)       
-            .field("data", float(payload["value"]))
+            .field("data", str(payload["value"]))
             .field("simulated",payload["simulated"])
         )
 
