@@ -13,7 +13,7 @@ from mqtt_publisher import mqtt_publisher_loop
 import time
 
 if __name__ == "__main__":
-    print('Starting app')
+    print('Starting PI1')
     settings = load_settings()
     threads = []
     stop_event = threading.Event()

@@ -47,6 +47,29 @@
         "DMS": {
             "simulated": true,
             "pin": 22
-        }
+        },
+        "DS2": {
+            "simulated": true,
+            "pin": 17
+        },
+        "BTN": {
+            "simulated": true,
+            "pin": 17
+        },
+        "DPIR2": {
+            "simulated": true,
+            "pin": 21
+        },
+        "DUS2": {
+            "simulated": true,
+            "pin": 19
+        },
+        "SD4": {
+            "simulated": true
+        },  
+        "DPIR3": {
+            "simulated": true,
+            "pin": 21
+        }        
     }   
 }
