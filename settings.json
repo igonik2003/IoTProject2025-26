@@ -20,7 +20,7 @@
         "url": "http://localhost:8086",
         "org": "iot-org",
         "bucket": "iot_data",
-        "token": "bAZXKDrYmXfQdaoprL4UlgiUEEcOdlv92QhBRyQ2prfDHfP6bHTU-4DOwZRqAbIx6iawPB_sPPbwjEyrldc54g=="
+        "token": "Dmp9-9FDYZ65LRNdzuzNhQHAcMaEAisIdDEcMyqG6tuTdyXx_n6hZUlHULYMIhGCU8WXM3jp9oFAfEtoicCwaA=="
     },
 
     "sensors": {
@@ -47,6 +47,29 @@
         "DMS": {
             "simulated": true,
             "pin": 22
-        }
+        },
+        "DS2": {
+            "simulated": true,
+            "pin": 17
+        },
+        "BTN": {
+            "simulated": true,
+            "pin": 17
+        },
+        "DPIR2": {
+            "simulated": true,
+            "pin": 21
+        },
+        "DUS2": {
+            "simulated": true,
+            "pin": 19
+        },
+        "SD4": {
+            "simulated": true
+        },  
+        "DPIR3": {
+            "simulated": true,
+            "pin": 21
+        }        
     }   
 }
