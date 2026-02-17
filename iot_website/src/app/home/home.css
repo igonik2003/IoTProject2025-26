@@ -1,0 +1,62 @@
+.page-container {
+  width: 100%;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* ===== MAIN TITLE ===== */
+.main-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: orange;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+/* ===== SECTION TITLES (PI1, PI2, PI3) ===== */
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #8B4513; /* braon */
+  text-transform: uppercase;
+  margin: 40px 0 25px 0;
+}
+
+/* ===== CARDS CONTAINER ===== */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 380px);
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+/* ===== CARD ===== */
+.card {
+  height: 280px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* ===== CARD TITLE ===== */
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: orange;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 6px 12px;
+  border-radius: 6px;
+}

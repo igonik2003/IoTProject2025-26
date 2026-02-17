@@ -1,0 +1,11 @@
+/* Reset minimalni */ 
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+} /* Root full height layout */ 
+:host { 
+    display: block;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif; 
+}

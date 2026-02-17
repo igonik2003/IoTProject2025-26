@@ -1,0 +1,35 @@
+<div class="page-container">
+
+  <h1 class="main-title">SYSTEM ELEMENTS</h1>
+
+  <h2 class="section-title">PI1</h2>
+
+  <div class="cards-container">
+    <div class="card" *ngFor="let card of pi1Cards"
+         [style.background-image]="'url(' + card.image + ')'"
+         (click)="goToDetails('pi1',card.id)">
+      <div class="card-title">{{ card.title }}</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">PI2</h2>
+
+  <div class="cards-container">
+    <div class="card" *ngFor="let card of pi2Cards"
+         [style.background-image]="'url(' + card.image + ')'"
+         (click)="goToDetails('pi2',card.id)">
+      <div class="card-title">{{ card.title }}</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">PI3</h2>
+
+  <div class="cards-container">
+    <div class="card" *ngFor="let card of pi3Cards"
+         [style.background-image]="'url(' + card.image + ')'"
+         (click)="goToDetails('pi3',card.id)">
+      <div class="card-title">{{ card.title }}</div>
+    </div>
+  </div>
+
+</div>
