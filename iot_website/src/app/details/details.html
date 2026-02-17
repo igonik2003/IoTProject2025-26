@@ -1,0 +1,14 @@
+<div class="details-container">
+
+  <h2>{{ piId.toUpperCase() }} - {{ sensorId.toUpperCase() }}</h2>
+
+  <div class="data-card"  *ngIf="!loading">
+    <p><strong>Data:</strong> {{ data ?? 'N/A'}}</p>
+    <p><strong>Simulated:</strong> {{ simulated ?? 'N/A'}}</p>
+    <p><strong>Time:</strong> {{ time ? (time | date:'medium') : 'N/A' }}</p>
+  </div>
+
+  <div class="grafana-panel" *ngIf="grafanaUrl">
+    <iframe [src]="grafanaUrl" width="80%" height="400" frameborder="0"></iframe>
+  </div>
+</div>
