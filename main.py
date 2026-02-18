@@ -9,7 +9,7 @@ from components.DMS import run_dms
 import queue
 from mqtt_client import create_mqtt_client
 from mqtt_publisher import mqtt_publisher_loop
-
+from people_counter_controller import PeopleCounterController
 import time
 
 if __name__ == "__main__":
@@ -17,7 +17,6 @@ if __name__ == "__main__":
     settings = load_settings()
     threads = []
     stop_event = threading.Event()
-
     data_queue = queue.Queue(maxsize=1000)
     mqtt_client = create_mqtt_client(settings)
     mqtt_thread = threading.Thread(
@@ -26,11 +25,21 @@ if __name__ == "__main__":
         daemon=True
     )
     mqtt_thread.start()
+    def publish_people_count(count):
+        data_queue.put((
+            "iot/pi1/people_count",
+            {
+                "value": count,
+                "simulated": settings['sensors']['DUS1']["simulated"]
+            }
+        ))
+    publish_people_count(0)
+    people_controller = PeopleCounterController(publish_people_count)    
     try:
         dus1_settings = settings['sensors']['DUS1']
-        run_dus1(dus1_settings,data_queue, threads, stop_event)
+        run_dus1(dus1_settings,data_queue, threads, stop_event, people_controller)
         dpir1_settings = settings['sensors']['DPIR1']
-        run_dpir1(dpir1_settings,data_queue, threads, stop_event)
+        run_dpir1(dpir1_settings,data_queue, threads, stop_event, people_controller)
         ds1_settings = settings['sensors']['DS1']
         run_ds1(ds1_settings,data_queue, threads, stop_event)
         #dl_settings = settings['sensors']["DL"]

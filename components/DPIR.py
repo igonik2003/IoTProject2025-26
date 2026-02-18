@@ -9,9 +9,9 @@ from simulators.DL import on as sim_on, off as sim_off
 # PIR senzori
 # from sensors.DPIR1 import run_dpir1_loop
 from simulators.DPIR1 import run_dpir1_simulator
+from people_counter_controller import PeopleCounterController
 
-
-def run_dpir1(settings,data_queue, threads, stop_event):
+def run_dpir1(settings,data_queue, threads, stop_event,people_controller):
 
     # Funkcija za slanje stanja LED
     def publish_led_state(state):
@@ -46,6 +46,7 @@ def run_dpir1(settings,data_queue, threads, stop_event):
         # ako je detektovan pokret → obavesti controller
         if motion_detected:
             controller.motion_detected()
+            people_controller.motion_triggered()
 
     # Pokretanje odgovarajućeg PIR-a
     if settings["simulated"]:

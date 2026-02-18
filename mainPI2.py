@@ -8,6 +8,7 @@ from components.SD4 import run_4sd
 import queue
 from mqtt_client import create_mqtt_client
 from mqtt_publisher import mqtt_publisher_loop
+from people_counter_controller import PeopleCounterController
 
 import time
 
@@ -26,11 +27,21 @@ if __name__ == "__main__":
         daemon=True
     )
     mqtt_thread.start()
+    def publish_people_count(count):
+        data_queue.put((
+            "iot/pi2/people_count",
+            {
+                "value": count,
+                "simulated": settings['sensors']['DUS2']["simulated"]
+            }
+    ))
+    publish_people_count(0)
+    people_controller = PeopleCounterController(publish_people_count)  
     try:
         dus2_settings = settings['sensors']['DUS2']
-        run_dus2(dus2_settings,data_queue, threads, stop_event)
+        run_dus2(dus2_settings,data_queue, threads, stop_event,people_controller)
         dpir2_settings = settings['sensors']['DPIR2']
-        run_dpir2(dpir2_settings,data_queue, threads, stop_event)
+        run_dpir2(dpir2_settings,data_queue, threads, stop_event,people_controller)
         ds2_settings = settings['sensors']['DS2']
         run_ds2(ds2_settings,data_queue, threads, stop_event)
         btn_settings = settings['sensors']["BTN"]
