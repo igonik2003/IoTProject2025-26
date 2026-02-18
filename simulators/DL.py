@@ -1,8 +1,9 @@
-import time
-import random
+import datetime
 
-def run_dl_simulator(delay, callback, stop_event):
-    while not stop_event.is_set():
-        state = random.choice([0, 1])
-        callback(state)
-        time.sleep(delay)
+def on():
+    print("SIM LED ON")
+    print(datetime.datetime.now())
+
+def off():
+    print("SIM LED OFF")
+    print(datetime.datetime.now())

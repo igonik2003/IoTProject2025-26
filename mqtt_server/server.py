@@ -13,14 +13,15 @@ BROKER_HOST = "127.0.0.1"
 BROKER_PORT = 1883
 TOPIC = "iot/#"
 
-
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connected to MQTT broker!")
         client.subscribe(TOPIC)
         print(f"Subscribed to topic: {TOPIC}")
+
     else:
         print(f"Failed to connect. Error code: {rc}")
+
 
 
 def on_message(client, userdata, msg):
@@ -53,8 +54,6 @@ def on_message(client, userdata, msg):
     except Exception as e:
         print(f"Error handling message: {e}")
 
-
-
 def main():
     settings = load_settings()
 
@@ -71,7 +70,7 @@ def main():
 
     mqtt_client.user_data_set({
         "influx_write_api": write_api,
-        "bucket": influx_cfg["bucket"]
+        "bucket": influx_cfg["bucket"],
     })
 
     mqtt_client.on_connect = on_connect

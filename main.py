@@ -3,7 +3,7 @@ from settings import load_settings
 from components.DUS1 import run_dus1
 from components.DPIR import run_dpir1
 from components.DS1 import run_ds1
-from components.DL import run_dl
+#from components.DL import run_dl
 from components.DB import run_db
 from components.DMS import run_dms
 import queue
@@ -33,8 +33,8 @@ if __name__ == "__main__":
         run_dpir1(dpir1_settings,data_queue, threads, stop_event)
         ds1_settings = settings['sensors']['DS1']
         run_ds1(ds1_settings,data_queue, threads, stop_event)
-        dl_settings = settings['sensors']["DL"]
-        run_dl(dl_settings, data_queue, threads, stop_event)
+        #dl_settings = settings['sensors']["DL"]
+        #run_dl(dl_settings, data_queue, threads, stop_event)
         db_settings = settings['sensors']["DB"]
         run_db(db_settings, data_queue, threads, stop_event)
         dms_settings = settings['sensors']["DMS"]
