@@ -1,21 +1,35 @@
 import threading
-from simulators.DB import run_db_simulator
 
 def run_db(settings, data_queue, threads, stop_event):
 
-    def db_callback(state: bool):
-        data_queue.put((
-            "iot/pi1/db",
-            {
-                "value": int(state),
-                "simulated": settings["simulated"]
-            }
-        ))
+    if settings["simulated"]==False:
+        """from sensors.DB import setup, on, off
 
-    t = threading.Thread(
-        target=run_db_simulator,
-        args=(3, db_callback, stop_event),
-        daemon=True
-    )
-    t.start()
-    threads.append(t)
+        DB_PIN = 27  # ili iz settings.json
+        setup(DB_PIN)
+
+        def activate():
+            on(DB_PIN)
+            data_queue.put((
+                "iot/pi1/db",
+                {
+                    "value": 1,
+                    "simulated": False
+                }
+            ))
+
+        def deactivate():
+            off(DB_PIN)
+            data_queue.put((
+                "iot/pi1/db",
+                {
+                    "value": 0,
+                    "simulated": False
+                }
+            ))
+
+        return activate, deactivate"""
+        return None
+    
+    else:
+        return None,None

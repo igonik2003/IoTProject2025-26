@@ -11,6 +11,7 @@ from mqtt_client import create_mqtt_client
 from mqtt_publisher import mqtt_publisher_loop
 from people_counter_controller import PeopleCounterController
 import time
+from alarm_controller import AlarmController
 
 if __name__ == "__main__":
     print('Starting PI1')
@@ -25,6 +26,21 @@ if __name__ == "__main__":
         daemon=True
     )
     mqtt_thread.start()
+    db_activate, db_deactivate = run_db(settings['sensors']['DB'], data_queue, threads, stop_event)
+
+    alarm_controller = AlarmController(
+        settings['sensors']['DB']['simulated'],
+        data_queue,
+        db_activate,
+        db_deactivate
+    )
+    data_queue.put((
+        "iot/house/alarm",
+        {
+            "value": 0,
+            "simulated": settings['sensors']['DB']['simulated']
+        }
+    ))
     def publish_people_count(count):
         data_queue.put((
             "iot/pi1/people_count",
@@ -41,11 +57,11 @@ if __name__ == "__main__":
         dpir1_settings = settings['sensors']['DPIR1']
         run_dpir1(dpir1_settings,data_queue, threads, stop_event, people_controller)
         ds1_settings = settings['sensors']['DS1']
-        run_ds1(ds1_settings,data_queue, threads, stop_event)
+        run_ds1(ds1_settings,data_queue, threads, stop_event,alarm_controller)
         #dl_settings = settings['sensors']["DL"]
         #run_dl(dl_settings, data_queue, threads, stop_event)
-        db_settings = settings['sensors']["DB"]
-        run_db(db_settings, data_queue, threads, stop_event)
+        #db_settings = settings['sensors']["DB"]
+        #run_db(db_settings, data_queue, threads, stop_event)
         dms_settings = settings['sensors']["DMS"]
         run_dms(dms_settings, data_queue, threads, stop_event)
         while True:

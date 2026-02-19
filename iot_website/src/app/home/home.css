@@ -31,9 +31,17 @@
   margin-bottom: 50px;
 }
 
+.cards-container1 {
+  display: grid;
+  grid-template-columns: repeat(1, 380px);
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 50px;
+}
 /* ===== CARD ===== */
 .card {
   height: 280px;
+  width:380px;
   border-radius: 12px;
   background-size: cover;
   background-position: center;

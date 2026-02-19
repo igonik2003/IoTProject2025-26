@@ -87,6 +87,9 @@ export class Details implements OnInit{
     else if (piId==="pi1" && sensorId==="dus1"){
       return "http://localhost:3000/d-solo/igslgxw/iot-project?orgId=1&from=1771298424483&to=1771320024483&timezone=browser&panelId=panel-1&__feature.dashboardSceneSolo=true";
     }
+    else if(piId=="house" && sensorId==="alarm"){
+      return "http://localhost:3000/d-solo/igslgxw/iot-project?orgId=1&from=1771485475665&to=1771507075665&timezone=browser&panelId=panel-10&__feature.dashboardSceneSolo=true";
+    }
     return "";
   }
 

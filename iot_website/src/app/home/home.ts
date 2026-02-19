@@ -29,8 +29,12 @@ export class Home{
   ];
 
   pi3Cards = [
-    {id:'dpir3', title: 'DPIR3 LIVING ROOM MOTION SENSOR', image: 'https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_2.625,f_auto,h_214,q_auto,w_380/c_pad,h_214,w_380/F7813024-01?pgw=1' }
+    {id:'dpir3', title: 'DPIR3 LIVING ROOM MOTION SENSOR', image: 'https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_2.625,f_auto,h_214,q_auto,w_380/c_pad,h_214,w_380/F7813024-01?pgw=1' },
   ];
+
+  alarm=[
+    {id:'alarm', title: 'ALARM', image: 'https://static.vecteezy.com/system/resources/thumbnails/023/209/812/small/alarm-icon-on-white-background-alarm-sign-flat-style-vector.jpg'}
+  ]
 
   goToDetails(piId: string, sensorId: string) {
   this.router.navigate(['/details', piId, sensorId]);
