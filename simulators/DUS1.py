@@ -11,7 +11,7 @@ def generate_values(initial_distance=200):
 
         # Ako nismo u pokretu, postoji šansa da započnemo kretanje
         if mode == "idle":
-            if random.random() < 0.6:  # 10% šanse da počne događaj
+            if random.random() < 0.9:  # 10% šanse da počne događaj
                 mode = random.choice(["approaching", "leaving"])
                 steps_remaining = random.randint(5, 8)
 

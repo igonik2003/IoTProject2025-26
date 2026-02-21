@@ -22,7 +22,7 @@ def run_ds1_simulator(delay,callback,stop_event):
             else:
                 button_pressed = False
 
-        print(button_pressed)
+        #print(button_pressed)
         callback(button_pressed)
         time.sleep(delay)
               

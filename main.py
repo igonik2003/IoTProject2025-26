@@ -12,6 +12,7 @@ from mqtt_publisher import mqtt_publisher_loop
 from people_counter_controller import PeopleCounterController
 import time
 from alarm_controller import AlarmController
+from security_alarm_controller import SecurityAlarmController
 
 if __name__ == "__main__":
     print('Starting PI1')
@@ -34,6 +35,12 @@ if __name__ == "__main__":
         db_activate,
         db_deactivate
     )
+    security_controller = SecurityAlarmController(
+        settings['sensors']['DB']['simulated'],
+        data_queue,
+        db_activate,
+        db_deactivate
+    )
     data_queue.put((
         "iot/house/alarm",
         {
@@ -50,12 +57,12 @@ if __name__ == "__main__":
             }
         ))
     publish_people_count(0)
-    people_controller = PeopleCounterController(publish_people_count)    
+    people_controller = PeopleCounterController(publish_people_count,security_controller)    
     try:
         dus1_settings = settings['sensors']['DUS1']
         run_dus1(dus1_settings,data_queue, threads, stop_event, people_controller)
         dpir1_settings = settings['sensors']['DPIR1']
-        run_dpir1(dpir1_settings,data_queue, threads, stop_event, people_controller)
+        run_dpir1(dpir1_settings,data_queue, threads, stop_event, people_controller,security_controller)
         ds1_settings = settings['sensors']['DS1']
         run_ds1(ds1_settings,data_queue, threads, stop_event,alarm_controller)
         #dl_settings = settings['sensors']["DL"]

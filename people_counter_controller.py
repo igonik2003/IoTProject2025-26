@@ -4,8 +4,9 @@ from collections import deque
 
 class PeopleCounterController:
 
-    def __init__(self, publish_callback, history_size=5):
+    def __init__(self, publish_callback,security_controller, history_size=5):
         self.publish_callback = publish_callback
+        self.security_controller = security_controller
         self.history = deque(maxlen=history_size)
         self.people_count = 0
         self.lock = threading.Lock()
@@ -53,6 +54,6 @@ class PeopleCounterController:
                 return
 
             #print("Last 5 distances:", distances)
-            #print("Direction:", direction, "People:", self.people_count)
-
+            print("Direction:", direction, "People:", self.people_count)
             self.publish_callback(self.people_count)
+            self.security_controller.update_people_count(self.people_count)

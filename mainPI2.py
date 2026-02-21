@@ -11,6 +11,7 @@ from mqtt_publisher import mqtt_publisher_loop
 from people_counter_controller import PeopleCounterController
 from alarm_controller import AlarmController
 from components.DB import run_db
+from security_alarm_controller import SecurityAlarmController
 
 import time
 
@@ -37,6 +38,12 @@ if __name__ == "__main__":
         db_activate,
         db_deactivate
     )
+    security_controller = SecurityAlarmController(
+        settings['sensors']['DB']['simulated'],
+        data_queue,
+        db_activate,
+        db_deactivate
+    )
     data_queue.put((
         "iot/house/alarm",
         {
@@ -53,12 +60,12 @@ if __name__ == "__main__":
             }
     ))
     publish_people_count(0)
-    people_controller = PeopleCounterController(publish_people_count)  
+    people_controller = PeopleCounterController(publish_people_count,security_controller)  
     try:
         dus2_settings = settings['sensors']['DUS2']
         run_dus2(dus2_settings,data_queue, threads, stop_event,people_controller)
         dpir2_settings = settings['sensors']['DPIR2']
-        run_dpir2(dpir2_settings,data_queue, threads, stop_event,people_controller)
+        run_dpir2(dpir2_settings,data_queue, threads, stop_event,people_controller,security_controller)
         ds2_settings = settings['sensors']['DS2']
         run_ds2(ds2_settings,data_queue, threads, stop_event,alarm_controller)
         btn_settings = settings['sensors']["BTN"]
