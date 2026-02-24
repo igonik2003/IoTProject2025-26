@@ -37,8 +37,7 @@ def get_distance():
     pulse_duration = pulse_end_time - pulse_start_time
     distance = (pulse_duration * 34300)/2
     return distance
-
-    
+  
 def run_dus1_loop(delay, callback, stop_event):
     while True:
         distance = get_distance()

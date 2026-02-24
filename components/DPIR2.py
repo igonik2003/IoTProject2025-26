@@ -2,9 +2,11 @@
 from simulators.DPIR2 import run_dpir2_simulator
 import threading
 import time
+from people_counter_controller import PeopleCounterController
+from security_alarm_controller import SecurityAlarmController
 
 
-def run_dpir2(settings,data_queue, threads, stop_event):
+def run_dpir2(settings,data_queue, threads, stop_event,people_controller,security_controller):
         def dpir2_callback(motion_detected: bool):
             data_queue.put((
                 "iot/pi2/dpir2",
@@ -13,6 +15,11 @@ def run_dpir2(settings,data_queue, threads, stop_event):
                     "simulated": settings["simulated"],
                 }
             ))
+            if motion_detected:
+                people_controller.motion_triggered() 
+                security_controller.motion_detected()
+
+                
         if settings['simulated']==True:
             dpir2_thread = threading.Thread(target = run_dpir2_simulator, args=(2,dpir2_callback,stop_event))
             print("Dpir2 sumilator started")

@@ -1,11 +1,16 @@
 import RPi.GPIO as GPIO
-import time
+
+GPIO.setmode(GPIO.BCM)
 
 def setup(pin):
-    GPIO.setmode(GPIO.BCM)
     GPIO.setup(pin, GPIO.OUT)
-
-def beep(pin, duration=1):
-    GPIO.output(pin, GPIO.HIGH)
-    time.sleep(duration)
     GPIO.output(pin, GPIO.LOW)
+
+def on(pin):
+    GPIO.output(pin, GPIO.HIGH)
+
+def off(pin):
+    GPIO.output(pin, GPIO.LOW)
+
+def cleanup():
+    GPIO.cleanup()

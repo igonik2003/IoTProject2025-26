@@ -32,4 +32,28 @@
     </div>
   </div>
 
+  <div class="cards-container1">
+    <div class="card" *ngFor="let card of alarm"
+          [style.background-image]="'url(' + card.image + ')'"
+          (click)="goToDetails('house',card.id)">
+      <div class="card-title">{{ card.title }}</div>
+    </div>
+  </div>  
+
+  <div class="cards-container1">
+    <div class="card1">
+      <h3 class="card-title">KITCHEN TIMER SETTINGS</h3>
+
+      <label>Initial Time (seconds):</label>
+      <input type="number" [(ngModel)]="timerSeconds" />
+
+      <button (click)="saveTimerSettings()">ADD INITIAL TIME</button>
+
+      <label>Add N seconds on BTN:</label>
+      <input type="number" [(ngModel)]="addSeconds" />
+
+      <button (click)="saveTimerSettings1()">ADD SECONDS</button>
+    </div>  
+</div>
+
 </div>

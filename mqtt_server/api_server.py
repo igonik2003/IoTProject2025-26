@@ -6,6 +6,9 @@ import os
 from influxdb_client import InfluxDBClient
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from settings import load_settings
+from pydantic import BaseModel
+import json
+from mqtt_client import create_mqtt_client
 
 app = FastAPI()
 
@@ -19,6 +22,8 @@ app.add_middleware(
 )
 
 settings = load_settings()
+mqtt_client = create_mqtt_client(settings)
+
 influx_cfg = settings["influxdb"]
 
 influx_client = InfluxDBClient(
@@ -30,7 +35,37 @@ influx_client = InfluxDBClient(
 query_api = influx_client.query_api()
 bucket = influx_cfg["bucket"]
 
+class TimerSettings(BaseModel):
+    seconds: int
 
+class TimerSettings1(BaseModel):
+    addSeconds: int
+
+@app.post("/api/timer/settings")
+def set_timer(time_setting:TimerSettings):
+    payload = {
+        "seconds": time_setting.seconds,
+    }
+    #print(payload["seconds"],payload["addSeconds"])
+    mqtt_client.publish(
+        "iot/pi2/timer/settings",
+        json.dumps(payload)
+    )
+
+    return {"status": "sent to pi2"}
+
+@app.post("/api/timer/settings1")
+def set_timer1(time_setting:TimerSettings1):
+    payload = {
+        "addSeconds": time_setting.addSeconds
+    }
+    #print(payload["seconds"],payload["addSeconds"])
+    mqtt_client.publish(
+        "iot/pi2/timer/settings1",
+        json.dumps(payload)
+    )
+
+    return {"status": "sent to pi2"}
 @app.get("/sensor/{pi_id}/{sensor_id}")
 def get_sensor_data(pi_id: str, sensor_id: str):
 

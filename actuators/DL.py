@@ -1,11 +1,14 @@
 import RPi.GPIO as GPIO
 
-def setup(pin):
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(pin, GPIO.OUT)
+LED_PIN = 18
 
-def on(pin):
-    GPIO.output(pin, GPIO.HIGH)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LED_PIN, GPIO.OUT)
 
-def off(pin):
-    GPIO.output(pin, GPIO.LOW)
+
+def on():
+    GPIO.output(LED_PIN, GPIO.HIGH)
+
+
+def off():
+    GPIO.output(LED_PIN, GPIO.LOW)

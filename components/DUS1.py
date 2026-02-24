@@ -2,9 +2,11 @@
 from simulators.DUS1 import run_dus1_simulator
 import threading
 import time
+from people_counter_controller import PeopleCounterController
 
-def run_dus1(settings,data_queue, threads, stop_event):
+def run_dus1(settings,data_queue, threads, stop_event,people_controller):
         def dus1_callback(distance):
+            people_controller.add_distance(distance)
             data_queue.put((
                 "iot/pi1/dus1",
                 {

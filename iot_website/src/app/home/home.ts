@@ -2,18 +2,19 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Api } from '../services/api';
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
 export class Home{
 
   constructor(private router: Router,private api: Api) {}
-
+  timerSeconds: number = 0;
+  addSeconds: number = 0;
   pi1Cards = [
     {id:'ds1', title: 'DS1 DOOR BUTTON SENSOR', image: 'https://i.ebayimg.com/images/g/VP0AAOSwq4NanhVL/s-l1200.jpg' },
     {id:'dpir1', title: 'DPIR1 MOTION SENSOR', image: 'https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_2.625,f_auto,h_214,q_auto,w_380/c_pad,h_214,w_380/F7813024-01?pgw=1' },
@@ -29,13 +30,31 @@ export class Home{
   ];
 
   pi3Cards = [
-    {id:'dpir3', title: 'DPIR3 LIVING ROOM MOTION SENSOR', image: 'https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_2.625,f_auto,h_214,q_auto,w_380/c_pad,h_214,w_380/F7813024-01?pgw=1' }
+    {id:'dpir3', title: 'DPIR3 LIVING ROOM MOTION SENSOR', image: 'https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_2.625,f_auto,h_214,q_auto,w_380/c_pad,h_214,w_380/F7813024-01?pgw=1' },
   ];
+
+  alarm=[
+    {id:'alarm', title: 'ALARM', image: 'https://static.vecteezy.com/system/resources/thumbnails/023/209/812/small/alarm-icon-on-white-background-alarm-sign-flat-style-vector.jpg'}
+  ]
 
   goToDetails(piId: string, sensorId: string) {
   this.router.navigate(['/details', piId, sensorId]);
   }
+  saveTimerSettings() {
+    this.api.setTimerSettings(this.timerSeconds)
+      .subscribe({
+        next: () => console.log("Timer settings sent"),
+        error: (err) => console.error(err)
+      });
+  }
 
+  saveTimerSettings1() {
+    this.api.setTimerSettings1(this.addSeconds)
+      .subscribe({
+        next: () => console.log("Timer1 settings sent"),
+        error: (err) => console.error(err)
+      });
+  }
   ngOnInit() {
   this.api.testConnection().subscribe({
     next: (res) => console.log("Backend response:", res),
