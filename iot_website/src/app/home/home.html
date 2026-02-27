@@ -38,7 +38,13 @@
           (click)="goToDetails('house',card.id)">
       <div class="card-title">{{ card.title }}</div>
     </div>
-  </div>  
+  </div>
+
+  <div class="pin-section">
+    <h3>DISARM ALARM</h3>
+    <input type="password" [(ngModel)]="webPin" placeholder="Enter PIN">
+    <button (click)="sendPin()">UNLOCK</button>
+  </div>
 
   <div class="cards-container1">
     <div class="card1">
@@ -54,6 +60,29 @@
 
       <button (click)="saveTimerSettings1()">ADD SECONDS</button>
     </div>  
+</div>
+
+<div class="camera-section">
+  <h2 class="section-title">WEB CAMERA</h2>
+
+  <div class="camera-container">
+    <img src="http://localhost:8000/video"
+         width="640"
+         height="480"
+         alt="Live camera feed">
+  </div>
+</div>
+
+<div class="rgb-section">
+  <h2 class="section-title">BRGB CONTROL</h2>
+
+  <div class="rgb-buttons">
+    <button (click)="setRGB(100,0,0)">RED</button>
+    <button (click)="setRGB(0,100,0)">GREEN</button>
+    <button (click)="setRGB(0,0,100)">BLUE</button>
+    <button (click)="setRGB(100,100,100)">WHITE</button>
+    <button (click)="setRGB(0,0,0)">OFF</button>
+  </div>
 </div>
 
 </div>

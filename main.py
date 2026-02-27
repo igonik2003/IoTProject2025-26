@@ -13,6 +13,7 @@ from people_counter_controller import PeopleCounterController
 import time
 from alarm_controller import AlarmController
 from security_alarm_controller import SecurityAlarmController
+from pin_controller import PinController
 
 if __name__ == "__main__":
     print('Starting PI1')
@@ -41,6 +42,7 @@ if __name__ == "__main__":
         db_activate,
         db_deactivate
     )
+    pin_controller = PinController(security_controller, data_queue)
     data_queue.put((
         "iot/house/alarm",
         {
@@ -64,13 +66,13 @@ if __name__ == "__main__":
         dpir1_settings = settings['sensors']['DPIR1']
         run_dpir1(dpir1_settings,data_queue, threads, stop_event, people_controller,security_controller)
         ds1_settings = settings['sensors']['DS1']
-        run_ds1(ds1_settings,data_queue, threads, stop_event,alarm_controller)
+        run_ds1(ds1_settings,data_queue, threads, stop_event,alarm_controller, pin_controller)
         #dl_settings = settings['sensors']["DL"]
         #run_dl(dl_settings, data_queue, threads, stop_event)
         #db_settings = settings['sensors']["DB"]
         #run_db(db_settings, data_queue, threads, stop_event)
         dms_settings = settings['sensors']["DMS"]
-        run_dms(dms_settings, data_queue, threads, stop_event)
+        run_dms(dms_settings, data_queue, threads, stop_event, pin_controller)
         while True:
             time.sleep(5)
 

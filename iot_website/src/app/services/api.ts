@@ -30,4 +30,19 @@ export class Api {
       addSeconds: addSeconds
     });
   }
+
+  verifyPin(pin: string) {
+    return this.http.post('http://127.0.0.1:8000/api/pin', {
+      pin: pin
+    });
+  }
+
+  setRGB(r: number, g: number, b: number) {
+    return this.http.post('http://127.0.0.1:8000/api/brgb', {
+      r: r,
+      g: g,
+      b: b
+    });
+  }
+
 }

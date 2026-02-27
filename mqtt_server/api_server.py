@@ -9,6 +9,8 @@ from settings import load_settings
 from pydantic import BaseModel
 import json
 from mqtt_client import create_mqtt_client
+import cv2
+from fastapi.responses import StreamingResponse
 
 app = FastAPI()
 
@@ -31,6 +33,49 @@ influx_client = InfluxDBClient(
     token=influx_cfg["token"],
     org=influx_cfg["org"]
 )
+
+from pydantic import BaseModel
+
+class RGBCommand(BaseModel):
+    r: int
+    g: int
+    b: int
+
+@app.post("/api/brgb")
+def set_rgb(cmd: RGBCommand):
+
+    mqtt_client.publish(
+        "iot/pi3/brgb",
+        json.dumps({
+            "r": cmd.r,
+            "g": cmd.g,
+            "b": cmd.b,
+            "simulated": True
+        })
+    )
+
+    return {"status": "RGB updated"}
+
+class WebPin(BaseModel):
+    pin: str
+
+@app.post("/api/pin")
+def verify_pin(webpin: WebPin):
+
+    if webpin.pin == "1234":   # isti PIN kao u PinController
+        mqtt_client.publish(
+            "iot/house/alarm",
+            json.dumps({"value": 0, "simulated": True})
+        )
+
+        mqtt_client.publish(
+            "iot/house/system_armed",
+            json.dumps({"value": 0, "simulated": True})
+        )
+
+        return {"status": "Correct PIN"}
+
+    return {"status": "Wrong PIN"}
 
 query_api = influx_client.query_api()
 bucket = influx_cfg["bucket"]
@@ -66,6 +111,7 @@ def set_timer1(time_setting:TimerSettings1):
     )
 
     return {"status": "sent to pi2"}
+    
 @app.get("/sensor/{pi_id}/{sensor_id}")
 def get_sensor_data(pi_id: str, sensor_id: str):
 
@@ -108,9 +154,29 @@ def get_sensor_data(pi_id: str, sensor_id: str):
         "simulated": simulated_value,
         "time": time.strftime("%Y-%m-%dT%H:%M:%SZ") if time else None
     }
+
 @app.get("/")
 def root():
     return {"status": "Backend connected successfully"}
+
+def generate_frames():
+    cap = cv2.VideoCapture(0)
+
+    while True:
+        success, frame = cap.read()
+        if not success:
+            break
+        else:
+            _, buffer = cv2.imencode('.jpg', frame)
+            frame = buffer.tobytes()
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+
+@app.get("/video")
+def video_feed():
+    return StreamingResponse(generate_frames(),
+                             media_type='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == "__main__":
