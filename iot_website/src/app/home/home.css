@@ -99,3 +99,53 @@ button{
   background: rgba(0, 0, 0, 0.6);
   margin-bottom: 40px;
 }
+
+.camera-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.camera-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.camera-container img {
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+.status-section {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.status-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.alarm-active {
+  background: red !important;
+  color: white;
+}
+
+.rgb-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.rgb-buttons button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+}

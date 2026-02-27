@@ -5,6 +5,8 @@ from components.DPIR2 import run_dpir2
 from components.DS2 import run_ds2
 from components.BTN import run_btn
 from components.SD4 import run_4sd
+from components.DHT3 import run_dht3
+from components.GSG import run_gsg
 import queue
 from mqtt_client import create_mqtt_client
 from mqtt_publisher import mqtt_publisher_loop
@@ -23,6 +25,7 @@ if __name__ == "__main__":
     settings = load_settings()
     threads = []
     stop_event = threading.Event()
+    system_armed = False
 
     data_queue = queue.Queue(maxsize=1000)
     mqtt_client = create_mqtt_client(settings)
@@ -94,12 +97,21 @@ if __name__ == "__main__":
 
             print("Primljeno dodavanje sekundi vreme:", add_seconds)
 
-            timer_controller.set_settings1(add_seconds)           
+            timer_controller.set_settings1(add_seconds)
+        elif msg.topic == "iot/house/system_armed":
+            data = json.loads(msg.payload.decode())
+            global system_armed
+            system_armed = bool(data["value"])
+            print("System armed updated:", system_armed)           
 
     mqtt_client.on_message = on_message
     mqtt_client.subscribe("iot/pi2/timer/settings")
     mqtt_client.subscribe("iot/pi2/timer/settings1")
+    mqtt_client.subscribe("iot/house/system_armed")
     mqtt_client.loop_start()
+
+    def get_system_armed():
+        return system_armed
 
     people_controller = PeopleCounterController(publish_people_count,security_controller)  
     try:
@@ -108,9 +120,13 @@ if __name__ == "__main__":
         dpir2_settings = settings['sensors']['DPIR2']
         run_dpir2(dpir2_settings,data_queue, threads, stop_event,people_controller,security_controller)
         ds2_settings = settings['sensors']['DS2']
-        run_ds2(ds2_settings,data_queue, threads, stop_event,alarm_controller)
+        run_ds2(ds2_settings, data_queue, threads, stop_event, alarm_controller, get_system_armed)
         btn_settings = settings['sensors']["BTN"]
         run_btn(btn_settings, data_queue, threads, stop_event,timer_controller)
+        dht3_settings = settings["sensors"]["DHT3"]
+        run_dht3(dht3_settings, data_queue, threads, stop_event)
+        gsg_settings = settings["sensors"]["GSG"]
+        run_gsg(gsg_settings, data_queue, threads, stop_event, security_controller)
         #sd_settings = settings['sensors']['SD4']
         #run_4sd(sd_settings,time4SD,data_queue, threads, stop_event)
 

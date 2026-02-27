@@ -20,7 +20,7 @@
         "url": "http://localhost:8086",
         "org": "iot-org",
         "bucket": "iot_data",
-        "token": "Dmp9-9FDYZ65LRNdzuzNhQHAcMaEAisIdDEcMyqG6tuTdyXx_n6hZUlHULYMIhGCU8WXM3jp9oFAfEtoicCwaA=="
+        "token": "idtWxIhGBfJLj4M6kxzIMzpAe9Vecvcb1UN9f-Z8UbHxdzF0x9QjHjfuMfvEw0na9_5fw8AY295xKWUsgcX4Uw=="
     },
 
     "sensors": {
@@ -70,6 +70,34 @@
         "DPIR3": {
             "simulated": true,
             "pin": 21
-        }        
+        },
+        "DHT1": {
+            "simulated": true,
+            "pin": 20
+        },
+        "DHT2": { 
+            "simulated": true,
+            "pin": 23
+        },
+        "DHT3": { 
+            "simulated": true,
+            "pin": 24
+        },
+        "IR": { 
+            "simulated": true 
+        },
+        "BRGB": { 
+            "simulated": true 
+        },
+        "LCD": { 
+            "simulated": true
+         },
+        "GSG": { 
+            "simulated": true,
+            "pin": 25
+        },
+        "WEBC": { 
+            "simulated": true
+        }
     }   
 }
