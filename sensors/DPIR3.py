@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 import random
 
-PIR_PIN =4
+PIR_PIN =21
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(PIR_PIN, GPIO.IN)

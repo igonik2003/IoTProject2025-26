@@ -5,7 +5,7 @@ def run_db(settings, data_queue, threads, stop_event):
     if settings["simulated"]==False:
         """from sensors.DB import setup, on, off
 
-        DB_PIN = 27  # ili iz settings.json
+        DB_PIN = 20  # ili iz settings.json
         setup(DB_PIN)
 
         def activate():
