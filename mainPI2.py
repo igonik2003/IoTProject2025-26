@@ -126,7 +126,7 @@ if __name__ == "__main__":
         dht3_settings = settings["sensors"]["DHT3"]
         run_dht3(dht3_settings, data_queue, threads, stop_event)
         gsg_settings = settings["sensors"]["GSG"]
-        run_gsg(gsg_settings, data_queue, threads, stop_event, security_controller)
+        run_gsg(gsg_settings, data_queue, threads, stop_event, security_controller, get_system_armed)
         #sd_settings = settings['sensors']['SD4']
         #run_4sd(sd_settings,time4SD,data_queue, threads, stop_event)
 

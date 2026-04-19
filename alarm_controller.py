@@ -55,7 +55,7 @@ class AlarmController:
 
     def _activate_alarm(self):
         self.alarm_active = True
-        #print("ALARM ACTIVATED")
+        print("ALARM ACTIVATED")
 
         if(self.settings==False):
             self.db_activate()
@@ -78,7 +78,7 @@ class AlarmController:
 
     def _deactivate_alarm(self):
         self.alarm_active = False
-        #print("ALARM DEACTIVATED")
+        print("ALARM DEACTIVATED")
         
         if(self.settings==False):
             self.db_deactivate()

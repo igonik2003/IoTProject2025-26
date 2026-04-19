@@ -8,8 +8,7 @@ from pin_controller import PinController
 def run_ds1(settings,data_queue, threads, stop_event, alarm_controller, pin_controller):
     
     def ds1_callback(button_pressed: bool):
-        if pin_controller.system_armed:
-            alarm_controller.process_ds1(button_pressed)
+        alarm_controller.process_ds1(button_pressed)
         data_queue.put((
             "iot/pi1/ds1",
             {

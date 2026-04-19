@@ -2,7 +2,7 @@ import threading
 from simulators.GSG import run_gsg_simulator
 from sensors.GSG import run_gsg_loop
 
-def run_gsg(settings, data_queue, threads, stop_event, security_controller):
+def run_gsg(settings, data_queue, threads, stop_event, security_controller, get_system_armed):
 
     def gsg_callback(movement):
 
@@ -14,7 +14,7 @@ def run_gsg(settings, data_queue, threads, stop_event, security_controller):
             }
         ))
 
-        if movement:
+        if movement and get_system_armed():
             security_controller._activate_alarm()
 
     if settings["simulated"]:

@@ -8,8 +8,7 @@ def run_ds2(settings, data_queue, threads, stop_event, alarm_controller, is_syst
     
     def ds2_callback(button_pressed: bool):
 
-        if is_system_armed():
-            alarm_controller.process_ds2(button_pressed)
+        alarm_controller.process_ds2(button_pressed)
 
         data_queue.put((
             "iot/pi2/ds2",
