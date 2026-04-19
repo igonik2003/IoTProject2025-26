@@ -90,6 +90,36 @@ export class Details implements OnInit{
     else if(piId=="house" && sensorId==="alarm"){
       return "http://localhost:3000/d-solo/igslgxw/iot-project?orgId=1&from=1771485475665&to=1771507075665&timezone=browser&panelId=panel-10&__feature.dashboardSceneSolo=true";
     }
+    else if(piId=="pi1" && sensorId==="db"){
+      return "http://localhost:3000/d-solo/igslgxw/odbrana?orgId=1&from=1772170214901&to=1772191814901&timezone=browser&panelId=panel-11&__feature.dashboardSceneSolo=true";
+    }
+    else if(piId=="pi1" && sensorId==="dl"){
+      return "http://localhost:3000/d-solo/igslgxw/odbrana?orgId=1&from=1772170214901&to=1772191814901&timezone=browser&panelId=panel-12&__feature.dashboardSceneSolo=true";
+    }
+    else if(piId=="pi1" && sensorId==="dms"){
+      return "http://localhost:3000/d-solo/igslgxw/odbrana?orgId=1&from=1772170214901&to=1772191814901&timezone=browser&panelId=panel-13&__feature.dashboardSceneSolo=true";
+    }
+    else if(piId=="pi2" && sensorId==="dht3"){
+      return "http://localhost:3000/d-solo/igslgxw/odbrana?orgId=1&from=1772170214901&to=1772191814901&timezone=browser&panelId=panel-14&__feature.dashboardSceneSolo=true";
+    }
+    else if(piId=="pi2" && sensorId==="gsg"){
+      return "http://localhost:3000/d-solo/igslgxw/odbrana?orgId=1&from=1772170214901&to=1772191814901&timezone=browser&panelId=panel-15&__feature.dashboardSceneSolo=true";
+    }
+    else if(piId=="pi3" && sensorId==="dht1"){
+      return "http://localhost:3000/d-solo/igslgxw/odbrana?orgId=1&from=1772170214901&to=1772191814901&timezone=browser&panelId=panel-16&__feature.dashboardSceneSolo=true";
+    }
+    else if(piId=="pi3" && sensorId==="dth2"){
+      return "http://localhost:3000/d-solo/igslgxw/odbrana?orgId=1&from=1772170214901&to=1772191814901&timezone=browser&panelId=panel-17&__feature.dashboardSceneSolo=true";
+    }
+    else if(piId=="pi3" && sensorId==="ir"){
+      return "http://localhost:3000/d-solo/igslgxw/odbrana?orgId=1&from=1772170214901&to=1772191814901&timezone=browser&panelId=panel-18&__feature.dashboardSceneSolo=true";
+    }
+    else if(piId=="pi3" && sensorId==="brgb"){
+      return "http://localhost:3000/d-solo/igslgxw/odbrana?orgId=1&from=1772170214901&to=1772191814901&timezone=browser&panelId=panel-19&__feature.dashboardSceneSolo=true";
+    }
+    else if(piId=="pi3" && sensorId==="lcd"){
+      return "http://localhost:3000/d-solo/igslgxw/odbrana?orgId=1&from=1772170214901&to=1772191814901&timezone=browser&panelId=panel-20&__feature.dashboardSceneSolo=true";
+    }
     return "";
   }
 
