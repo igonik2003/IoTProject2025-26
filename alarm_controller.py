@@ -31,7 +31,6 @@ class AlarmController:
             else:
                 pressed_since = self.ds2_pressed_since
 
-            # Ako je dugme pritisnuto
             if state:
                 if pressed_since is None:
                     if sensor_name == "ds1":
@@ -51,11 +50,12 @@ class AlarmController:
                     self.ds2_pressed_since = None
 
                 if self.alarm_active:
-                    self._deactivate_alarm()
+                    self._deactivate_alarm()                                    
+
 
     def _activate_alarm(self):
         self.alarm_active = True
-        #print("ALARM ACTIVATED")
+        print("ALARM ACTIVATED")
 
         if(self.settings==False):
             self.db_activate()
@@ -78,7 +78,7 @@ class AlarmController:
 
     def _deactivate_alarm(self):
         self.alarm_active = False
-        #print("ALARM DEACTIVATED")
+        print("ALARM DEACTIVATED")
         
         if(self.settings==False):
             self.db_deactivate()

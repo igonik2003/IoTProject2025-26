@@ -10,4 +10,9 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(PORT_BUTTON, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 def run_ds2_loop(delay,callback,stop_event):   
-    GPIO.add_event_detect(PORT_BUTTON, GPIO.RISING, callback=lambda x:callback(True), bouncetime = 100)
+    while not stop_event.is_set():
+        current_state = GPIO.input(PORT_BUTTON)
+
+        callback(current_state)
+
+        time.sleep(0.1)  # polling na 100ms

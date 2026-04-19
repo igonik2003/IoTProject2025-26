@@ -69,8 +69,8 @@ if __name__ == "__main__":
         #run_dl(dl_settings, data_queue, threads, stop_event)
         #db_settings = settings['sensors']["DB"]
         #run_db(db_settings, data_queue, threads, stop_event)
-        dms_settings = settings['sensors']["DMS"]
-        run_dms(dms_settings, data_queue, threads, stop_event)
+        #dms_settings = settings['sensors']["DMS"]
+        #run_dms(dms_settings, data_queue, threads, stop_event)
         while True:
             time.sleep(5)
 

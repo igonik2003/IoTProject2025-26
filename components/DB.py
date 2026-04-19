@@ -3,7 +3,7 @@ import threading
 def run_db(settings, data_queue, threads, stop_event):
 
     if settings["simulated"]==False:
-        """from sensors.DB import setup, on, off
+        """from actuators.DB import setup, on, off
 
         DB_PIN = 20  # ili iz settings.json
         setup(DB_PIN)
@@ -29,7 +29,7 @@ def run_db(settings, data_queue, threads, stop_event):
             ))
 
         return activate, deactivate"""
-        return None
+        return None,None
     
     else:
         return None,None

@@ -53,7 +53,7 @@ class PeopleCounterController:
                 # nema čistog trenda
                 return
 
-            #print("Last 5 distances:", distances)
-            #print("Direction:", direction, "People:", self.people_count)
+            print("Last 5 distances:", distances)
+            print("Direction:", direction, "People:", self.people_count)
             self.publish_callback(self.people_count)
             self.security_controller.update_people_count(self.people_count)
