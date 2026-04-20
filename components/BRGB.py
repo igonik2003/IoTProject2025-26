@@ -5,7 +5,7 @@ def run_brgb(settings, data_queue, threads, stop_event):
 
     def publish_color(r, g, b):
         data_queue.put((
-            "iot/pi3/brgb",
+            "iot/pi3/brgb/state",
             {
                 "value": f"{r},{g},{b}",
                 "simulated": settings["simulated"]

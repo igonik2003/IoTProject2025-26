@@ -42,7 +42,29 @@ if __name__ == "__main__":
         db_activate,
         db_deactivate
     )
+
+    def pin_input_loop(pin_controller):
+        while True:
+            try:
+                pin = input("Enter PIN: ")
+
+                for digit in pin:
+                    pin_controller.enter_digit(digit)
+
+            except EOFError:
+                print("Input closed, retrying...")
+                time.sleep(1)
+
     pin_controller = PinController(security_controller, data_queue)
+    t_pin = threading.Thread(
+        target=pin_input_loop,
+        args=(pin_controller,),
+        daemon=True
+    )
+    t_pin.start()
+
+    
+
     data_queue.put((
         "iot/house/alarm",
         {

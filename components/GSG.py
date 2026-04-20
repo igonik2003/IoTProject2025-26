@@ -6,6 +6,8 @@ def run_gsg(settings, data_queue, threads, stop_event, security_controller, get_
 
     def gsg_callback(movement):
 
+        print(f"GSG movement detected: {movement}")
+
         data_queue.put((
             "iot/pi2/gsg",
             {
@@ -14,8 +16,8 @@ def run_gsg(settings, data_queue, threads, stop_event, security_controller, get_
             }
         ))
 
-        if movement and get_system_armed():
-            security_controller._activate_alarm()
+        if movement:
+            security_controller._activate_alarm()   
 
     if settings["simulated"]:
 

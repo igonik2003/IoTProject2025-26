@@ -64,6 +64,7 @@ if __name__ == "__main__":
         brgb_controller = run_brgb(brgb_settings, data_queue, threads, stop_event)
         ir_settings = settings["sensors"]["IR"]
         run_ir(ir_settings, data_queue, threads, stop_event, brgb_controller)
+        
         def on_message(client, userdata, msg):
 
             if msg.topic == "iot/pi3/brgb":
@@ -78,7 +79,28 @@ if __name__ == "__main__":
 
                 brgb_controller(r, g, b)
 
+            elif msg.topic == "iot/pi2/dht3/temperature":
+                data = json.loads(msg.payload.decode())
+                temp = data["value"]
+
+                old = lcd_manager.values.get("dht3") or (None, None)
+                _, hum = old
+
+                lcd_manager.update("dht3", temp, hum)
+
+
+            elif msg.topic == "iot/pi2/dht3/humidity":
+                data = json.loads(msg.payload.decode())
+                hum = data["value"]
+
+                old = lcd_manager.values.get("dht3") or (None, None)
+                temp, _ = old
+
+                lcd_manager.update("dht3", temp, hum)
+
         mqtt_client.subscribe("iot/pi3/brgb")
+        mqtt_client.subscribe("iot/pi2/dht3/temperature")
+        mqtt_client.subscribe("iot/pi2/dht3/humidity")
         mqtt_client.on_message = on_message
         mqtt_client.loop_start()
         while True:
